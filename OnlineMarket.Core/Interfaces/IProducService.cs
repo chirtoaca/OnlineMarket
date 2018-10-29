@@ -10,6 +10,5 @@ namespace OnlineMarket.Core.Interfaces
     public interface IProductService
     {
         List<Product> GetProducts();
-
     }
 }
