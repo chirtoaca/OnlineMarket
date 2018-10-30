@@ -17,6 +17,24 @@ namespace OnlineMarket.Core.Services
         {
             _repository = repository;
         }
+
+        public void AddProduct(Product product)
+        {
+
+            _repository.Add(product);
+        }
+
+        public void DeleteProduct(Product product)
+        {
+            _repository.Delete(product);
+        }
+
+        public Product GetProduct(int id)
+        {
+            var result = _repository.GetAll<Product>().FirstOrDefault(p => p.Id == id);
+            return result;
+        }
+
         public List<Product> GetProducts()
         {
             var result = _repository.GetAll<Product>().ToList();
@@ -24,7 +42,10 @@ namespace OnlineMarket.Core.Services
 
         }
 
-
+        public void UpdateProduct(Product product)
+        {
+            _repository.Update(product);
+        }
     }
 }
 
