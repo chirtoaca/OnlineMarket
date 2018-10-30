@@ -1,0 +1,42 @@
+﻿@model IEnumerable<OnlineMarket.DataModels.Models.Product>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Products!</h2>
+
+<div class="container" style="margin-top:3%;">
+    <div class="col-md-offset-10">
+        @Html.ActionLink("Add a Product!", "AddProduct", "Products", new { @class = "btn btn-success" })
+    </div>
+</div>
+
+@using (Html.BeginForm("Index", "Products", FormMethod.Get))
+{
+   
+
+    <table class="table table-striped" style="margin-top: 5%">
+        <thead>
+            <tr class="row">
+                <th></th>
+                <th>Name</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr class="row">
+                    <th><img src="~/images/@product.ImageUrl" width="100" height="100" /></th>
+                    <th>@product.Name</th>
+                    <th>@product.Category.Name</th>
+
+                    <th>@Html.ActionLink("Details!", "DetailsProduct", "Products", new { Id = product.Id }, new { @class = "btn btn-dark col-md-offset-3 " })</th>
+                    <th>@Html.ActionLink("Delete!", "DeleteProduct", "Products", new { Id = product.Id }, new { @class = "btn btn-danger  " })</th>
+
+                    <th>@Html.ActionLink("Update!", "UpdateProduct", "Products", new { Id = product.Id }, new { @class = "btn btn-info " })</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+    }
