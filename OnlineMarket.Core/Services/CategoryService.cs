@@ -21,11 +21,7 @@ namespace OnlineMarket.Core.Services
         {
             _repository.Add(category);
         }
-
-        public void DeleteCategory(Category category)
-        {
-            _repository.Delete(category);
-        }
+        
 
         public List<Category> GetCategories()
         {
@@ -33,9 +29,20 @@ namespace OnlineMarket.Core.Services
             return result;
         }
 
+        public Category GetCategory(int id)
+        {
+            var result = _repository.GetAll<Category>().FirstOrDefault(p => p.Id == id);
+            return result;
+        }
+
         public void UpdateCategory(Category category)
         {
             _repository.Update(category);
+        }
+
+        public void DeleteCategory(Category category)
+        {
+            _repository.Delete(category);
         }
     }
 }
