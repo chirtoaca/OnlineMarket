@@ -35,5 +35,7 @@ namespace OnlineMarket.DataModels.Repository
             dbContext.Set<T>().Remove(entity);
             dbContext.SaveChanges();
         }
+
+        
     }
 }
