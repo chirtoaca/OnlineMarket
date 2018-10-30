@@ -20,7 +20,7 @@ namespace OnlineMarket.DataModels.Models
         public virtual Category Category { get; set; }
 
         [ForeignKey("Category")]
-        public int CategoyId { get; set; }
+        public int CategoryId { get; set; }
 
         [Required]
         public int QuantityInStock { get; set; }
@@ -29,5 +29,7 @@ namespace OnlineMarket.DataModels.Models
         public int Price { get; set; }
 
         public string Description { get; set; }
+
+        public string ImageUrl { get; set; }
     }
 }
