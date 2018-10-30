@@ -53,6 +53,14 @@
     <Compile Include="Migrations\201810282232539_InitialMigration.Designer.cs">
       <DependentUpon>201810282232539_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810291626582_ModifyCategory.cs" />
+    <Compile Include="Migrations\201810291626582_ModifyCategory.Designer.cs">
+      <DependentUpon>201810291626582_ModifyCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810300858531_AddImageUrlInProduct.cs" />
+    <Compile Include="Migrations\201810300858531_AddImageUrlInProduct.Designer.cs">
+      <DependentUpon>201810300858531_AddImageUrlInProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
@@ -71,6 +79,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201810282232539_InitialMigration.resx">
       <DependentUpon>201810282232539_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810291626582_ModifyCategory.resx">
+      <DependentUpon>201810291626582_ModifyCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810300858531_AddImageUrlInProduct.resx">
+      <DependentUpon>201810300858531_AddImageUrlInProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
