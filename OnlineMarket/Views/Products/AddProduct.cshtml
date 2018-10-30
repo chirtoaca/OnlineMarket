@@ -1,0 +1,60 @@
+﻿@model OnlineMarket.DataModels.Models.Product
+@{
+    /**/
+
+    ViewBag.Title = "AddProduct";
+}
+@using (Html.BeginForm("AddProduct", "Products", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h2>Add Producty</h2>
+
+
+    <input type="file" name="file" id="file" style="width: 100%;" /> <br /><br />
+    
+    <div class="form-group">
+        @Html.LabelFor(x => x.Name, new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group ">
+        @Html.LabelFor(x => x.CategoryId, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(x => x.CategoryId, new SelectList(ViewBag.Categories, "Id", "Name"), new { @class = "form-control" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.QuantityInStock, new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.QuantityInStock, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Description, new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.Description, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Price, new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.Price, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-success" value="Create" />
+        </div>
+    </div>
+}
