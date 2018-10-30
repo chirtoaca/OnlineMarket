@@ -13,7 +13,7 @@
 
     <table class="table table-striped" style="margin-top: 5%">
         <thead>
-            <tr class="row">
+            <tr class="row" >
                 <th>Id</th>
                 <th>Name</th>
             </tr>
@@ -21,10 +21,13 @@
         <tbody>
             @foreach (var category in Model)
             {
-                <tr class="row">
-                    <th>@category.Id</th>
-                    <th>@category.Name</th> 
-                </tr>
+            <tr class="row">
+                <th>@category.Id</th>
+                <th class="col-lg-8">@category.Name</th>
+                <th>@Html.ActionLink("Delete!", "DeleteCategory", "Categories", new { Id = category.Id }, new { @class = "btn btn-danger col-md-offset-6 " })</th>
+                
+                <th>@Html.ActionLink("Update!", "UpdateCategory", "Categories", new { Id = category.Id }, new { @class = "btn btn-info " })</th>
+            </tr>
             }
         </tbody>
 </table>
