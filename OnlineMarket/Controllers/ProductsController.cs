@@ -1,4 +1,4 @@
-﻿
+﻿using OnlineMarket.ViewModels;
 using OnlineMarket.Core.Interfaces;
 using OnlineMarket.Core.Services;
 using OnlineMarket.DataModels.Models;
@@ -22,10 +22,25 @@ namespace OnlineMarket.Controllers
 
         }
         // GET: Products
-        public ActionResult Index(string option, string search)
+        public ActionResult Index()
         {
+
             var products = _productService.GetProducts();
-            return View(products);
+
+            var productsViewModelList = new List<ProductsShortViewModel>();
+            foreach (var product in products)
+            {
+                var productVm = new ProductsShortViewModel
+                {
+                    Name = product.Name,
+                    CategoryId = product.CategoryId,
+                    Category = product.Category,
+                    Price = product.Price
+                };
+
+                productsViewModelList.Add(productVm);
+            }
+            return View(productsViewModelList);
         }
 
         [HttpGet]

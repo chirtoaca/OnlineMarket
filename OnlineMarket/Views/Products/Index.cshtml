@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OnlineMarket.DataModels.Models.Product>
+﻿@model IEnumerable<OnlineMarket.ViewModels.ProductsShortViewModel>
 @{
     ViewBag.Title = "Index";
 }
@@ -18,18 +18,18 @@
     <table class="table table-striped" style="margin-top: 5%">
         <thead>
             <tr class="row">
-                <th></th>
                 <th>Name</th>
                 <th>Category</th>
+                <th>Price</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var product in Model)
             {
                 <tr class="row">
-                    <th><img src="~/images/@product.ImageUrl" width="100" height="100" /></th>
                     <th>@product.Name</th>
                     <th>@product.Category.Name</th>
+                    <th>@product.Price</th>
 
                     <th>@Html.ActionLink("Details!", "DetailsProduct", "Products", new { Id = product.Id }, new { @class = "btn btn-dark col-md-offset-3 " })</th>
                     <th>@Html.ActionLink("Delete!", "DeleteProduct", "Products", new { Id = product.Id }, new { @class = "btn btn-danger  " })</th>
