@@ -27,20 +27,21 @@ namespace OnlineMarket.Controllers
 
             var products = _productService.GetProducts();
 
-            var productsViewModelList = new List<ProductsShortViewModel>();
+            var productsShort = new List<ProductsShortViewModel>();
             foreach (var product in products)
             {
                 var productVm = new ProductsShortViewModel
                 {
+                    Id=product.Id,
                     Name = product.Name,
                     CategoryId = product.CategoryId,
                     Category = product.Category,
                     Price = product.Price
                 };
 
-                productsViewModelList.Add(productVm);
+                productsShort.Add(productVm);
             }
-            return View(productsViewModelList);
+            return View(productsShort);
         }
 
         [HttpGet]
@@ -69,10 +70,10 @@ namespace OnlineMarket.Controllers
             return HttpNotFound();
         }
 
-        public ActionResult UpdateProduct(int Id = 0)
+        public ActionResult UpdateProduct(int id)
         {
             ViewBag.Categories = _categorySerivice.GetCategories();
-            Product prodUpdate = _productService.GetProduct(Id);
+            Product prodUpdate = _productService.GetProduct(id);
 
             if (prodUpdate == null)
             {
@@ -93,21 +94,16 @@ namespace OnlineMarket.Controllers
         }
 
 
-        public ActionResult DetailsProduct(int Id)
+        public ActionResult ProductDetails(int id)
         {
-            Product prodDetails = _productService.GetProduct(Id);
-            var productDetails = _productService.GetProduct(Id);
-            if (prodDetails == null)
+            var productDetails = _productService.GetProduct(id);
+            if (productDetails == null)
             {
                 return HttpNotFound();
             }
             else
                 return View(productDetails);
 
-        }
-
-        
-
-        
+        }   
     }
 }

@@ -31,7 +31,7 @@
                     <th>@product.Category.Name</th>
                     <th>@product.Price</th>
 
-                    <th>@Html.ActionLink("Details!", "DetailsProduct", "Products", new { Id = product.Id }, new { @class = "btn btn-dark col-md-offset-3 " })</th>
+                    <th>@Html.ActionLink("Details!", "ProductDetails", "Products", new { Id = product.Id }, new { @class = "btn btn-dark col-md-offset-3 " })</th>
                     <th>@Html.ActionLink("Delete!", "DeleteProduct", "Products", new { Id = product.Id }, new { @class = "btn btn-danger  " })</th>
 
                     <th>@Html.ActionLink("Update!", "UpdateProduct", "Products", new { Id = product.Id }, new { @class = "btn btn-info " })</th>

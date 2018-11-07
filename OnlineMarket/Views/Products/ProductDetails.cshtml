@@ -1,0 +1,35 @@
+﻿@model OnlineMarket.DataModels.Models.Product
+@{
+    ViewBag.Title = "Products Details";
+}
+
+<h2>DetailsProduct</h2>
+
+<table class="table table-striped" style="margin-top: 5%">
+    <thead>
+        <tr class="row">
+            <th>Id</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Quantity in stock</th>
+            <th>Price</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ var product = Model;
+            <tr class="row">
+                <th>@product.Id</th>
+                <th>@product.Name</th>
+                <th>@product.Category.Name</th>
+                <th>@product.QuantityInStock</th>
+                <th>@product.Price</th>
+                <th>@product.Description</th>
+
+                <th>@Html.ActionLink("Delete!", "DeleteProduct", "Products", new { Id = product.Id }, new { @class = "btn btn-danger col-md-offset-6 " })</th>
+
+                <th>@Html.ActionLink("Update!", "UpdateProduct", "Products", new { Id = product.Id }, new { @class = "btn btn-info " })</th>
+            </tr>
+        }
+    </tbody>
+</table>
