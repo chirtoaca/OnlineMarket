@@ -105,5 +105,33 @@ namespace OnlineMarket.Controllers
                 return View(productDetails);
 
         }   
+
+        [HttpGet]
+        public ActionResult SearchByName(string search)
+        {
+            var products = _productService.GetProducts().Where(p => p.Name.Contains(search));
+            if (search == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                var productsShort = new List<ProductsShortViewModel>();
+                foreach (var product in products)
+                {
+                    var productVm = new ProductsShortViewModel
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        CategoryId = product.CategoryId,
+                        Category = product.Category,
+                        Price = product.Price
+                    };
+
+                    productsShort.Add(productVm);
+                }
+                return View(productsShort);
+            }
+        }
     }
 }
