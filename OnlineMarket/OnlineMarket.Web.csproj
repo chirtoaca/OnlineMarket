@@ -220,11 +220,13 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ProductsListViewModel.cs" />
     <Compile Include="ViewModels\ProductsShortViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -309,6 +311,7 @@
     <Content Include="Views\Products\UpdateProduct.cshtml" />
     <Content Include="Views\Products\ProductDetails.cshtml" />
     <Content Include="Views\Products\SearchByName.cshtml" />
+    <Content Include="Views\Navigation\Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
