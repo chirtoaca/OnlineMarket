@@ -21,5 +21,8 @@ namespace OnlineMarket.ViewModels
         public int CategoryId { get; set; }
 
         public int Price { get; set; }
+
+        public byte[] ImageData { get; set; }
+        public string ImageMimeTime { get; set; }
     }
 }
