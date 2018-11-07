@@ -32,11 +32,14 @@ namespace OnlineMarket.Controllers
             {
                 var productVm = new ProductsShortViewModel
                 {
-                    Id=product.Id,
+                    Id = product.Id,
                     Name = product.Name,
                     CategoryId = product.CategoryId,
                     Category = product.Category,
-                    Price = product.Price
+                    Price = product.Price,
+                    ImageData = product.ImageData,
+                    ImageMimeTime = product.ImageMimeTime
+                    
                 };
 
                 productsShort.Add(productVm);
@@ -52,8 +55,14 @@ namespace OnlineMarket.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddProduct(Product product)
+        public ActionResult AddProduct(Product product, HttpPostedFileBase image = null)
         {
+            if (image != null)
+            {
+                product.ImageMimeTime = image.ContentType;
+                product.ImageData = new byte[image.ContentLength];
+                image.InputStream.Read(product.ImageData, 0, image.ContentLength);
+            }
 
             _productService.AddProduct(product);
             return RedirectToAction("Index");
@@ -104,7 +113,7 @@ namespace OnlineMarket.Controllers
             else
                 return View(productDetails);
 
-        }   
+        }
 
         [HttpGet]
         public ActionResult SearchByName(string search)
@@ -132,6 +141,21 @@ namespace OnlineMarket.Controllers
                 }
                 return View(productsShort);
             }
+        }
+
+        public ActionResult GetImage(int id)
+        {
+            var product = _productService.GetProduct(id);
+
+            if (product != null)
+            {
+                return File(product.ImageData, product.ImageMimeTime);
+            }
+            else
+            {
+                return null;
+            }
+
         }
     }
 }

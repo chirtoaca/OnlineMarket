@@ -9,7 +9,7 @@
 
 <div class="container" style="margin-top:3%;">
     <div class="col-md-offset-10">
-        @Html.ActionLink("Add a Product!", "AddProduct", "Products", new { @class = "btn btn-success" })
+        @Html.ActionLink("Add a Product!", "AddProduct", "Products", new { @class = "btn btn-success", })
     </div>
 </div>
 
@@ -23,13 +23,14 @@
         </p>
     </form>
 }
-@using (Html.BeginForm("Index", "Products", FormMethod.Get))
+@using (Html.BeginForm("Index", "Products", FormMethod.Get, new { enctype = "multipart/form-data" }))
 {
 
 
     <table class="table table-striped" style="margin-top: 5%">
         <thead>
             <tr class="row">
+                <th>Image</th>
                 <th>Name</th>
                 <th>Category</th>
                 <th>Price</th>
@@ -39,6 +40,16 @@
             @foreach (var product in Model)
             {
                 <tr class="row">
+                    <th>
+                        @if (product.ImageData != null)
+                        {
+                            <div class ="pull-left" style="margin-right: 10px">
+                                <img class="img-thumbnail" width="75" height="75"
+                                     src="@Url.Action("GetImage", "Products",
+                                new { product.Id })" />
+                            </div>
+                        }
+                     </th>
                     <th>@product.Name</th>
                     <th>@product.Category.Name</th>
                     <th>@product.Price</th>
