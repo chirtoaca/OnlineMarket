@@ -22,11 +22,11 @@ namespace OnlineMarket.Controllers
 
         }
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(string category)
         {
 
-            var products = _productService.GetProducts();
-
+            var products = _productService.GetProducts().Where(p => category == null || p.Category.Name == category);
+           
             var productsShort = new List<ProductsShortViewModel>();
             foreach (var product in products)
             {
@@ -39,10 +39,15 @@ namespace OnlineMarket.Controllers
                     Price = product.Price,
                     ImageData = product.ImageData,
                     ImageMimeTime = product.ImageMimeTime
-                    
+
                 };
 
                 productsShort.Add(productVm);
+
+                //ProductsListViewModel productLVM = new ProductsListViewModel()
+                //{
+                //    CurrentCategory = category
+                //};
             }
             return View(productsShort);
         }
