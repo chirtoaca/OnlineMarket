@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<OnlineMarket.ViewModels.ProductsShortViewModel>
 @{
+    /**/
+
     ViewBag.Title = "Index";
 }
 
@@ -11,9 +13,19 @@
     </div>
 </div>
 
+
+@using (Html.BeginForm("SearchByName", "Products", FormMethod.Get))
+{
+    <form>
+        <p>
+            <input type="text" name="search">
+            <input type="submit" value="Filter" />
+        </p>
+    </form>
+}
 @using (Html.BeginForm("Index", "Products", FormMethod.Get))
 {
-   
+
 
     <table class="table table-striped" style="margin-top: 5%">
         <thead>
@@ -39,4 +51,4 @@
             }
         </tbody>
     </table>
-    }
+}
