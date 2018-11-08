@@ -1,46 +1,46 @@
 ﻿@model OnlineMarket.DataModels.Models.Product
 @{
-    ViewBag.Title = "Products Details";
+    ViewBag.Title = "Product Details";
 }
 
-<h2>DetailsProduct</h2>
+<h2>Product details:</h2>
 
-<table class="table table-striped" style="margin-top: 5%">
-    <thead>
-        <tr class="row">
-            <th>Image</th>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Quantity in stock</th>
-            <th>Price</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{ var product = Model;
-        <tr class="row">
-            <th>
-                @if (product.ImageData != null)
-                {
-                    <div class="pull-left" style="margin-right: 10px">
-                        <img class="img-thumbnail" width="75" height="75"
-                             src="@Url.Action("GetImage", "Products",
-                                new { product.Id })" />
-                    </div>
-                }
-            </th>
-            <th>@product.Id</th>
-            <th>@product.Name</th>
-            <th>@product.Category.Name</th>
-            <th>@product.QuantityInStock</th>
-            <th>@product.Price</th>
-            <th>@product.Description</th>
 
-            <th>@Html.ActionLink("Delete!", "DeleteProduct", "Products", new { Id = product.Id }, new { @class = "btn btn-danger col-md-offset-6 " })</th>
 
-            <th>@Html.ActionLink("Update!", "UpdateProduct", "Products", new { Id = product.Id }, new { @class = "btn btn-info " })</th>
-        </tr>
-        }
-    </tbody>
-</table>
+<div class="well col-xs-12">
+
+    <div class=" col-xs-8 ">
+        <div class="text-center h3">
+            <dt> @Model.Name</dt>
+        </div>
+
+        <div class="text-center" style="margin-right: 10px">
+            <img class="img-thumbnail" width="400" height="400"
+                 src="@Url.Action("GetImage", "Products",
+                                new { Model.Id })" />
+        </div>
+
+        <div class=" h4" style="margin-top: 20px">
+            <dt>Description:</dt>
+        </div>
+
+        <div class="well h5" style="margin-top: 10px">
+            @Model.Description
+        </div>
+    </div>
+
+    
+    <div class=" col-xs-4 text-center">
+        <div class="well" style="margin-bottom: 70px">
+            @Html.ActionLink("Delete!", "DeleteProduct", "Products", new { id = Model.Id }, new { @class = "btn btn-danger", @style="margin-right: 30px;" })
+
+            @Html.ActionLink("Edit!", "UpdateProduct", "Products", new { id = Model.Id }, new { @class = "btn btn-info " })
+        </div>
+
+        <h2><dt>Price</dt><span class=" label label-success">@Model.Price</span></h2>
+
+        <h2 style="margin-top: 50px"><dt>Quantity in stock</dt><span class=" label label-primary">@Model.QuantityInStock</span></h2>
+    </div>
+
+
+</div>

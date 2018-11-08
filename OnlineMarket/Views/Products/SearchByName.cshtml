@@ -1,37 +1,60 @@
 ﻿@model IEnumerable<OnlineMarket.ViewModels.ProductsShortViewModel>
-@{
-    ViewBag.Title = "Search";
+   @{
+
+    ViewBag.Title = "Search!";
 }
 
 <h2>Search!</h2>
 
 
+
 @using (Html.BeginForm("SearchByName", "Products", FormMethod.Get))
 {
+    <form>
+        <p>
+            <input type="text" name="search">
+            <input type="submit" value="Search" />
+        </p>
+    </form>
+}
+@using (Html.BeginForm("SearchByName", "Products", FormMethod.Get, new { enctype = "multipart/form-data" }))
+{
 
+    foreach (var product in Model)
+    {
+        <div class="col-xs-12 well">
+            <div class="col-xs-8">
+                @if (product.ImageData != null)
+                {
+                    <div class="pull-left " style="margin-right: 30px">
+                        <img class="img-thumbnail" width="100" height="100"
+                             src="@Url.Action("GetImage", "Products",
+                                new { product.Id })" />
+                    </div>
+                }
 
-    <table class="table table-striped" style="margin-top: 5%">
-        <thead>
-            <tr class="row">
-                <th>Name</th>
-                <th>Category</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var product in Model)
-            {
-                <tr class="row">
-                    <th>@product.Name</th>
-                    <th>@product.Category.Name</th>
-                    <th>@product.Price</th>
+                <div>
+                    @Html.ActionLink(@product.Name, "ProductDetails", "Products", new { id = product.Id }, new { @class = "btn btn-lg btn-block " })
+                    <div class="text-center h4">
+                        @product.Category.Name
+                    </div>
+                </div>
+            </div>
 
-                    <th>@Html.ActionLink("Details!", "ProductDetails", "Products", new { Id = product.Id }, new { @class = "btn btn-dark col-md-offset-3 " })</th>
-                    <th>@Html.ActionLink("Delete!", "DeleteProduct", "Products", new { Id = product.Id }, new { @class = "btn btn-danger  " })</th>
+            <h2 class="text-center col-xs-2" style="margin-top:30px;"> <span class="label label-primary">@product.Price $</span></h2>
 
-                    <th>@Html.ActionLink("Update!", "UpdateProduct", "Products", new { Id = product.Id }, new { @class = "btn btn-info " })</th>
-                </tr>
-            }
-        </tbody>
-    </table>
+            <div class="col-xs-2 container">
+
+                <div class="row text-center" style="margin-top:5px;">
+                    @Html.ActionLink("Delete!", "DeleteProduct", "Products", new { id = product.Id }, new { @class = "btn btn-danger" })
+                </div>
+
+                <div class="row text-center" style="margin-top:20px;">
+                    @Html.ActionLink("Edit!", "UpdateProduct", "Products", new { id = product.Id }, new { @class = "btn btn-info" })
+                </div>
+
+            </div>
+        </div>
+    }
+    
 }
