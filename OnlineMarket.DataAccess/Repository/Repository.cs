@@ -36,6 +36,9 @@ namespace OnlineMarket.DataModels.Repository
             dbContext.SaveChanges();
         }
 
-        
+        public IQueryable<T> GetAllAsNoTracking<T>() where T :class
+        {
+            return dbContext.Set<T>().AsNoTracking().AsQueryable();
+        }
     }
 }
