@@ -16,5 +16,6 @@ namespace OnlineMarket.Core.Interfaces
         void UpdateProduct(Product product);
 
         Product GetProduct(int id);
+        Product GetProductNoTracking(int id);
     }
 }
