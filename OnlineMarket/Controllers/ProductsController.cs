@@ -14,6 +14,7 @@ namespace OnlineMarket.Controllers
     {
         private readonly IProductService _productService;
         private readonly ICategoryService _categorySerivice;
+        public int PageSize = 4;
 
         public ProductsController(IProductService productService, ICategoryService categoryService)
         {
@@ -22,11 +23,16 @@ namespace OnlineMarket.Controllers
 
         }
         // GET: Products
-        public ActionResult Index(string category)
+        public ActionResult Index(string category, int page = 1)
         {
 
-            var products = _productService.GetProducts().Where(p => category == null || p.Category.Name == category);
+            var products = _productService.GetProducts()
+                .Where(p => category == null || p.Category.Name == category)
+                .OrderBy(p => p.Id)
+                .Skip((page - 1) * PageSize)
+                .Take(PageSize);
            
+
             var productsShort = new List<ProductsShortViewModel>();
             foreach (var product in products)
             {
@@ -41,15 +47,27 @@ namespace OnlineMarket.Controllers
                     ImageMimeTime = product.ImageMimeTime
 
                 };
-
-                productsShort.Add(productVm);
-
-                //ProductsListViewModel productLVM = new ProductsListViewModel()
-                //{
-                //    CurrentCategory = category
-                //};
+            
+            productsShort.Add(productVm);
             }
-            return View(productsShort);
+
+            
+            ProductsListViewModel productLVM = new ProductsListViewModel()
+                {
+                    PagingInfo = new PagingInfoViewModel
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = category == null ? 
+                        _productService.GetProducts().Count() : 
+                        _productService.GetProducts().Where( e => e.Category.Name == category ).Count()
+                    },
+                    CurrentCategory = category,
+                    Products = productsShort
+
+                };
+            
+            return View(productLVM);
         }
 
         [HttpGet]
@@ -97,10 +115,23 @@ namespace OnlineMarket.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateProduct(Product product)
+        public ActionResult UpdateProduct(Product product, HttpPostedFileBase image = null)
         {
+            var existingProduct = _productService.GetProductNoTracking(product.Id);
+
             if (ModelState.IsValid)
             {
+                if (image != null)
+                {
+                    product.ImageMimeTime = image.ContentType;
+                    product.ImageData = new byte[image.ContentLength];
+                    image.InputStream.Read(product.ImageData, 0, image.ContentLength);
+                }
+                else if (image == null && existingProduct.ImageData != null)
+                {
+                    product.ImageData = existingProduct.ImageData;
+                    product.ImageMimeTime = existingProduct.ImageMimeTime;
+                }
                 _productService.UpdateProduct(product);
                 return RedirectToAction("Index");
             }
@@ -139,7 +170,9 @@ namespace OnlineMarket.Controllers
                         Name = product.Name,
                         CategoryId = product.CategoryId,
                         Category = product.Category,
-                        Price = product.Price
+                        Price = product.Price,
+                        ImageData = product.ImageData,
+                        ImageMimeTime = product.ImageMimeTime
                     };
 
                     productsShort.Add(productVm);
