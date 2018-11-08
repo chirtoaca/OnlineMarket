@@ -9,7 +9,8 @@ namespace OnlineMarket.ViewModels
 {
     public class ProductsListViewModel
     {
-        public List<Product> Products { get; set; }
+        public List<ProductsShortViewModel> Products { get; set; }
         public string CurrentCategory { get; set; }
+        public PagingInfoViewModel PagingInfo { get; set; }
     }
 }
