@@ -19,9 +19,9 @@ namespace OnlineMarket.Controllers
         public PartialViewResult Menu(string category)
         {
             ViewBag.SelectedCategory = category;
-            var categories = _productService.GetProducts().Select(x => x.Category.Name);
+            var categories = _productService.GetProducts().Select(x => x.Category.Name).Distinct().OrderBy(x => x);
 
-            return PartialView(categories);
+             return PartialView(categories);
         }
     }
 }
