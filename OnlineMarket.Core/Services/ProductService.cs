@@ -35,6 +35,13 @@ namespace OnlineMarket.Core.Services
             return result;
         }
 
+        public Product GetProductNoTracking(int id)
+        {
+            var result = _repository.GetAllAsNoTracking<Product>().FirstOrDefault(p => p.Id == id);
+            return result;
+        }
+
+
         public List<Product> GetProducts()
         {
             var result = _repository.GetAll<Product>().ToList();
