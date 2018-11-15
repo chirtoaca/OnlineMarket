@@ -1,0 +1,61 @@
+﻿@model OnlineMarket.ViewModels.CustomerListViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@foreach (var customer in Model.CustomerOrders)
+{
+<div class="well"> 
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">First name</th>
+                <th scope="col">Last name</th>
+                <th scope="col">City</th>
+                <th scope="col">District</th>
+                <th scope="col">Adress</th>
+                <th scope="col">Phone number</th>
+                <th scope="col">Zip</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>@customer.FirstName</th>
+                <th>@customer.LastName</th>
+                <th>@customer.City</th>
+                <th>@customer.District</th>
+                <th>@customer.Adress</th>
+                <th>@customer.PhoneNumber</th>
+                <th>@customer.Zip</th>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+
+        @foreach (var orders in customer.Orders)
+        {
+            foreach (var products in orders.OrdersProducts)
+            {
+
+                <tbody>
+                    <tr>
+                        <th>@products.ProductId</th>
+                        <th>@products.Quantity</th>
+                        <th>@products.PricePerUnit</th>
+                    </tr>
+                </tbody>
+            }
+        }
+    </table>
+</div>
+}
