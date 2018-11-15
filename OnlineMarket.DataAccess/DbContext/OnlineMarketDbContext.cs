@@ -18,6 +18,12 @@ namespace OnlineMarket.DataModels.DbContext
 
         public DbSet<Category> Categories { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderProduct> OrderProducts { get; set; }
+
+        public DbSet<Customer> Customers { get; set; }
+
         public static OnlineMarketDbContext Create()
         {
             return new OnlineMarketDbContext();
