@@ -1,0 +1,124 @@
+﻿@model OnlineMarket.ViewModels.CustomerOrderViewModel
+@{
+    ViewBag.Title = "Add order";
+}
+
+<h2>Add order</h2>
+
+@using (Html.BeginForm("AddOrder", "Order", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.FirstName, new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @readonly = "readonly" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.LastName, new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", @readonly = "readonly" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.District, new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.District, new { @class = "form-control", @readonly = "readonly" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.City, new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.City, new { @class = "form-control", @readonly = "readonly" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Adress, new { @class = "col-md-2 control-label", })
+
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.Adress, new { @class = "form-control", @readonly = "readonly" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.PhoneNumber, new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control", @readonly = "readonly" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Zip, new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.Zip, new { @class = "form-control", @readonly = "readonly" })
+        </div>
+    </div>
+
+
+@*<table class="table">
+        <thead>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>City</th>
+                <th>District</th>
+                <th>Address</th>
+                <th>Phone number</th>
+                <th>Zip</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>@Model.FirstName</th>
+                <th>@Model.LastName</th>
+                <th>@Model.City</th>
+                <th>@Model.District</th>
+                <th>@Model.Adress</th>
+                <th>@Model.PhoneNumber</th>
+                <th>@Model.Zip</th>
+            </tr>
+        </tbody>
+    </table>*@
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product id</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model.Orders)
+        {
+            foreach (var product in order.OrdersProducts)
+            {
+                <tr>
+                    <th>@product.ProductId</th>
+                    <th>@product.Quantity</th>
+                    <th>@product.PricePerUnit</th>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-success" value="Create" />
+        </div>
+    </div>
+
+}
