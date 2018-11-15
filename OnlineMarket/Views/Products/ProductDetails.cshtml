@@ -3,10 +3,6 @@
     ViewBag.Title = "Product Details";
 }
 
-<h2>Product details:</h2>
-
-
-
 <div class="well col-xs-12">
 
     <div class=" col-xs-8 ">
@@ -32,12 +28,23 @@
     
     <div class=" col-xs-4 text-center">
         <div class="well" style="margin-bottom: 70px">
-            @Html.ActionLink("Delete!", "DeleteProduct", "Products", new { id = Model.Id }, new { @class = "btn btn-danger", @style="margin-right: 30px;" })
+            @Html.ActionLink("Delete!", "DeleteProduct", "Products", new { id = Model.Id }, new { @class = "btn btn-danger", @style = "margin-right: 30px;" })
 
             @Html.ActionLink("Edit!", "UpdateProduct", "Products", new { id = Model.Id }, new { @class = "btn btn-info " })
+
+            <div class="row text-center">
+                @using (Html.BeginForm("AddToCart", "Cart"))
+                {
+                    <div>
+                        @Html.HiddenFor(x => x.Id)
+                        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                        <input type="submit" class="btn btn-success" value="Add to cart" />
+                    </div>
+                }
+            </div>
         </div>
 
-        <h2><dt>Price</dt><span class=" label label-success">@Model.Price</span></h2>
+        <h2><dt>Price</dt><span class=" label label-success">@Model.Price.ToString("c")</span></h2>
 
         <h2 style="margin-top: 50px"><dt>Quantity in stock</dt><span class=" label label-primary">@Model.QuantityInStock</span></h2>
     </div>
