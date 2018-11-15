@@ -69,6 +69,10 @@
     <Compile Include="Migrations\201811070857219_AddColumnForImage.Designer.cs">
       <DependentUpon>201811070857219_AddColumnForImage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811111310311_AddOrderTables.cs" />
+    <Compile Include="Migrations\201811111310311_AddOrderTables.Designer.cs">
+      <DependentUpon>201811111310311_AddOrderTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
@@ -99,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811070857219_AddColumnForImage.resx">
       <DependentUpon>201811070857219_AddColumnForImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811111310311_AddOrderTables.resx">
+      <DependentUpon>201811111310311_AddOrderTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
