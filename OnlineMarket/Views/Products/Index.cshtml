@@ -47,17 +47,20 @@
                 </div>
         </div>
 
-        <h2 class="text-center col-xs-2" style="margin-top:30px;"> <span class="label label-primary">@product.Price $</span></h2>
+        <h2 class="text-center col-xs-2" style="margin-top:30px;"> <span class="label label-primary">@product.Price.ToString("c")</span></h2>
 
         <div class="col-xs-2 container">
 
-            <div class="row text-center" style="margin-top:5px;">
+            <div class="row text-center">
                 @Html.ActionLink("Delete!", "DeleteProduct", "Products", new { id = product.Id }, new { @class = "btn btn-danger" })
             </div>
 
-            <div class="row text-center" style="margin-top:20px;">
+            <div class="row text-center">
                 @Html.ActionLink("Edit!", "UpdateProduct", "Products", new { id = product.Id }, new { @class = "btn btn-info" })
             </div>
+
+            
+
 
         </div>
     </div>
