@@ -50,6 +50,9 @@ namespace OnlineMarket
             container.RegisterType<IRepository, Repository>();
             container.RegisterType<IProductService, ProductService>();
             container.RegisterType<ICategoryService, CategoryService>();
+            container.RegisterType<ICustomerService, CustomerService>();
+            container.RegisterType<IOrderProductService, OrderProductsService>();
+            container.RegisterType<IOrderService, OrderService>();
         }
     }
 }
